@@ -2,6 +2,7 @@
   // modules
   const listeners = require('./listeners');
   const render = require('./render');
+  const notifications = require('./notifications');
 
   const sockets = (function () {
     // create all sockets
@@ -17,13 +18,18 @@
 
       // resond to color change switch
       socket.on('chat-message', function (data) {
+        // render message
         render.newMessage(
           data.name,
           data.message,
           data.color
         );
 
+        // scroll to bottom
         render.scroll();
+
+        // os notification
+        notifications.send(data.name, data.message);
       });
 
       // listening for a new message

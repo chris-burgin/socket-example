@@ -5,9 +5,11 @@
   const main = (function () {
     // requires
     const sockets = require('./modules/sockets')
+    const notification = require('./modules/notifications')
 
     // start the main process
     const init = () => {
+      notification.init();
       sockets.create();
     }
 
