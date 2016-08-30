@@ -8,7 +8,7 @@
     // render new message
     const newMessage = (name, message, color) => {
       let html = `<li>
-        <span class="name" style="color: ${color}"> ${name} </span>
+        <span class="name" style="color: ${color}"> ${name}: </span>
         <span class="message"> ${message} </span>
       </li>`
       $('.chat .window ul').append(html)
