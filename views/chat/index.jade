@@ -1,0 +1,13 @@
+extends ../base.jade
+
+block main
+  main.chat
+    div.window
+      ul
+    div.inputs
+      input(class="color" type="text" value="#ffffff")
+      input(class="name" type="text" placeholder="John Doe")
+      input(class="message" type="text" placeholder="Your Message!")
+
+block scripts
+  script(src='/js/chat/main.min.js')

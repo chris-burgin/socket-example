@@ -37,19 +37,21 @@
     //* ****************
     // BASIC ROUTES
     //* ****************
-    const index = require('./routes/index')
+    const color = require('./routes/color')
+    const chat = require('./routes/chat')
 
-    // home
-    app.use('/', index)
+    // color
+    app.use('/color', color)
+
+    // chat
+    app.use('/chat', chat)
 
     //* ****************
     // SOCKETS
     //* ****************
-    // import sockets
-    const color = require('./sockets/color')
-
-    // init sockets
-    color.init();
+    // import and start sockets
+    const colorSocket = require('./sockets/color').init();
+    const chatSocket = require('./sockets/chat').init();
 
     //* ****************
     // START APP

@@ -6,7 +6,7 @@
   const router = express.Router()
 
   router.get('/', function (req, res) {
-    res.render('index')
+    res.render('color/index')
   })
 
   module.exports = router
