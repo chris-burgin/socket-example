@@ -14,7 +14,7 @@
 
     const chatSocket = () => {
       // create socket
-      const socket = io.connect('http://10.200.161.222:4001/chat');
+      const socket = io.connect('http://10.200.230.71:4001/chat');
 
       // resond to color change switch
       socket.on('chat-message', function (data) {
