@@ -1,6 +1,9 @@
 (function () {
+  // requires
+  const sockets = require('./sockets')
+
+  // render module
   const render = (function () {
-    // render
     const init = () => {
 
       let ChatMessages = React.createClass({
@@ -55,19 +58,13 @@
                 name: this.state.data.name,
                 message: ''
             }});
-          } else {
-            this.setState({
-              error: 'Wrong Key!'
-            })
           }
         },
         render: function() {
           return (
             <div className="window">
-
               <ChatMessages items={this.state.items} />
               <div className="inputs">
-                <span> {this.state.error} </span>
                 <form>
                   <input onChange={this.onChange} value={this.state.data.color} data-name="color" type="text"/>
                   <input onChange={this.onChange} value={this.state.data.name} data-name="name" type="text" placeholder="John Doe"/>
@@ -76,6 +73,11 @@
               </div>
             </div>
           );
+        },
+        componentDidMount: function(){
+
+
+          sockets.send({name: "1", color: 1, message: 1});
         }
       });
 

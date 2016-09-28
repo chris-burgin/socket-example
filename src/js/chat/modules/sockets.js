@@ -1,7 +1,4 @@
 (function () {
-  // modules
-  const notifications = require('./notifications');
-
   // create socket connection
   const socket = io.connect('http://localhost:4001/chat');
 
@@ -19,6 +16,7 @@
     const listen = (callback) => {
       // resond to color change switch
       socket.on('chat-message', function (data) {
+        console.log('yas');
         callback(data);
       });
     };
