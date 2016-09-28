@@ -6,11 +6,12 @@
     // requires
     const sockets = require('./modules/sockets')
     const notification = require('./modules/notifications')
+    const render = require('./modules/render');
 
     // start the main process
     const init = () => {
-      notification.init();
-      sockets.create();
+      render.init();
+      notification.init(); // init notifications
     }
 
     return {init}

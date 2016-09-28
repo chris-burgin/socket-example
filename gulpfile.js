@@ -31,10 +31,7 @@ gulp.task('javascript-external', function () {
 gulp.task('javascript-chat', function () {
   return gulp.src('src/js/chat/main.js')
   .pipe(named())
-  .pipe(webpack())
-  .pipe(babel({
-    presets: ['es2015']
-  }))
+  .pipe(webpack( require('./webpack.config.js') )) // webpack & babel
   .pipe(rename({suffix: '.min'}))
   .pipe(gulp.dest('public/js/chat/'))
 })

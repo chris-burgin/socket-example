@@ -1,13 +1,10 @@
 extends ../base.jade
 
 block main
-  main.chat
-    div.window
-      ul
-    div.inputs
-      input(class="color" type="text" value="#ffffff")
-      input(class="name" type="text" placeholder="John Doe")
-      input(class="message" type="text" placeholder="Your Message!")
-
+  main.chat#chat
+    
 block scripts
+  script(src="https://unpkg.com/react@15.3.2/dist/react-with-addons.js")
+  script(src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.min.js")
+  script(src="https://unpkg.com/babel-core@5.8.38/browser.min.js")
   script(src='/js/chat/main.min.js')

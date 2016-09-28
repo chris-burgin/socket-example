@@ -1,62 +1,29 @@
 (function () {
   // modules
-  const listeners = require('./listeners');
-  const render = require('./render');
   const notifications = require('./notifications');
 
+  // create socket connection
+  const socket = io.connect('http://localhost:4001/chat');
+
   const sockets = (function () {
-    // create all sockets
-    const create = () => {
-      chatSocket();
-    }
+    // send
+    const send = (data) => {
+      socket.emit('chat-message', {
+        name: data.name,
+        message: data.message,
+        color: data.color
+      });
+    };
 
-    // socket for listening to colors
-
-    const chatSocket = () => {
-      // create socket
-      const socket = io.connect('http://10.200.230.71:4001/chat');
-
+    // listen
+    const listen = (callback) => {
       // resond to color change switch
       socket.on('chat-message', function (data) {
-        // render message
-        render.newMessage(
-          data.name,
-          data.message,
-          data.color
-        );
-
-        // scroll to bottom
-        render.scroll();
-
-        // os notification
-        notifications.send(data.name, data.message);
+        callback(data);
       });
+    };
 
-      // listening for a new message
-      listeners.newMessage(function(message){
-
-        // clear input
-        render.clearInput('.message');
-
-        // render message
-        render.newMessage(
-          render.fetchInput('.name'),
-          message,
-          render.fetchInput('.color')
-        );
-
-        // send message
-        socket.emit('chat-message', {
-          name: render.fetchInput('.name'),
-          message: message,
-          color: render.fetchInput('.color')
-        });
-
-        render.scroll();
-      });
-    }
-
-    return {create}
+    return {send, listen,}
   }())
 
   module.exports = sockets
