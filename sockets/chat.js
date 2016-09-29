@@ -6,6 +6,9 @@
   const app = express()
   const io = require('socket.io').listen(app.listen(4001));
 
+  io.set('transports', ['xhr-polling']);
+  io.set('polling duration', 10);
+
   const color = (function () {
     const init = () => {
       // color changing socket
