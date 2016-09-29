@@ -55,7 +55,7 @@ gulp.task('img', function () {
 // run 'gulp watch'
 gulp.task('watch', function () {
   gulp.watch('src/css/**/*.styl', ['stylus'])
-  gulp.watch('src/js/**/*.js', ['javascript-chat', 'javascript-color'])
+  gulp.watch('src/js/**/*.*', ['javascript-chat', 'javascript-color'])
   gulp.watch('src/js/external/*.js', ['javascript-external'])
   gulp.watch('src/img/**/*.*', ['img'])
 })
