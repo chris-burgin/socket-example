@@ -39,17 +39,6 @@ gulp.task('javascript-chat', function () {
   .pipe(gulp.dest('public/js/chat/'))
 })
 
-gulp.task('javascript-color', function () {
-  return gulp.src('src/js/color/main.js')
-  .pipe(named())
-  .pipe(webpack())
-  .pipe(babel({
-    presets: ['es2015']
-  }))
-  .pipe(rename({suffix: '.min'}))
-  .pipe(gulp.dest('public/js/color/'))
-})
-
 gulp.task('img', function () {
   return gulp.src('src/img/**/*.*')
   .pipe(gulp.dest('public/img/'))
@@ -58,10 +47,10 @@ gulp.task('img', function () {
 // run 'gulp watch'
 gulp.task('watch', function () {
   gulp.watch('src/css/**/*.styl', ['stylus'])
-  gulp.watch('src/js/**/*.js', ['javascript-chat', 'javascript-color'])
+  gulp.watch('src/js/**/*.js', ['javascript-chat'])
   gulp.watch('src/js/external/*.js', ['javascript-external'])
   gulp.watch('src/img/**/*.*', ['img'])
 })
 
 // Default gulp task that runs when you 'gulp'
-gulp.task('default', ['stylus', 'javascript-external', 'javascript-chat', 'javascript-color', 'img'])
+gulp.task('default', ['stylus', 'javascript-external', 'javascript-chat', 'img'])
