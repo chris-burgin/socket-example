@@ -94,6 +94,8 @@
 
             // set the new state
             this.setState({ items: newItems })
+
+            // Notify
           })
         }
       })
