@@ -1,11 +1,19 @@
 (function () {
   // requires
-  const sockets = require('./sockets')
+  const notifications = require('./notifications')
 
   // render module
   const render = (function () {
-    const init = () => {
 
+    const init = () => {
+      renderChat();
+    }
+
+    const renderChat = () => {
+      // required modules
+      const sockets = require('./sockets')
+
+      // Chat Messages
       let ChatMessages = React.createClass({
         render: function() {
           // create messages
@@ -23,6 +31,7 @@
         }
       });
 
+      // Chat App
       let ChatApp = React.createClass({
         // setup the initial data for the application
         getInitialState: function() {
@@ -79,30 +88,25 @@
             </div>
           );
         },
-          componentDidMount: function(){
-            let t = this; // access in children
+        componentDidMount: function(){
+          // listen for new items
+          sockets.listen((item) => {
+            // add a new item
+            let newItems = this.state.items.concat([item]);
 
-            // listen for new items
-            sockets.listen(function(item){
-              // add a new item
-              let newItems = t.state.items.concat([item]);
+            // set the new state
+            this.setState({ items: newItems });
 
-              // set state
-              t.setState({
-                items: newItems,
-              });
-            });
-          }
-
+            // notifications
+          });
+        }
       });
 
+      // render the elements
       ReactDOM.render(
         <ChatApp />,
         document.getElementById('chat')
       );
-
-      //ChatApp.sockets(ChatApp);
-
     }
 
     return {init}
