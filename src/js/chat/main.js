@@ -4,13 +4,12 @@
   /** ******************/
   const main = (function () {
     // requires
-    const sockets = require('./modules/sockets')
     const notification = require('./modules/notifications')
     const render = require('./modules/render');
 
     // start the main process
     const init = () => {
-      render.init();
+      render.init(); // react render, including sockets
       notification.init(); // init notifications
     }
 

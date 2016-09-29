@@ -43,21 +43,26 @@
         handleSubmit: function(e) {
           if (e.key === 'Enter') {
             // setup new items
-          	let newItems = this.state.items.concat([{
+            let newItem = {
               color: this.state.data.color,
               name: this.state.data.name,
               message: this.state.data.message,
               id: Date.now(),
-            }]);
+            }
 
+          	let newItems = this.state.items.concat([newItem]);
+
+            // set state
             this.setState({
               items: newItems,
-              error: '',
               data: {
                 color: this.state.data.color,
                 name: this.state.data.name,
                 message: ''
             }});
+
+            // send
+            sockets.send(newItem);
           }
         },
         render: function() {
@@ -74,17 +79,29 @@
             </div>
           );
         },
-        componentDidMount: function(){
+          componentDidMount: function(){
+            let t = this; // access in children
 
+            // listen for new items
+            sockets.listen(function(item){
+              // add a new item
+              let newItems = t.state.items.concat([item]);
 
-          sockets.send({name: "1", color: 1, message: 1});
-        }
+              // set state
+              t.setState({
+                items: newItems,
+              });
+            });
+          }
+
       });
 
       ReactDOM.render(
         <ChatApp />,
         document.getElementById('chat')
       );
+
+      //ChatApp.sockets(ChatApp);
 
     }
 

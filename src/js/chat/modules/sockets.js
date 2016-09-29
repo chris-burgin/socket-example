@@ -5,18 +5,13 @@
   const sockets = (function () {
     // send
     const send = (data) => {
-      socket.emit('chat-message', {
-        name: data.name,
-        message: data.message,
-        color: data.color
-      });
+      socket.emit('chat-message', data);
     };
 
     // listen
     const listen = (callback) => {
       // resond to color change switch
       socket.on('chat-message', function (data) {
-        console.log('yas');
         callback(data);
       });
     };

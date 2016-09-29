@@ -13,11 +13,7 @@
         // listen for a change in color
         socket.on('chat-message', function (data) {
           // emit color change to all clients
-          socket.broadcast.emit('chat-message', {
-            name: data.name,
-            message: data.message,
-            color: data.color
-          });
+          socket.broadcast.emit('chat-message', data);
         });
       });
     }
